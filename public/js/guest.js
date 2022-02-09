@@ -2058,6 +2058,18 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Post',
   props: {
     'post': Object
+  },
+  methods: {
+    getExtract: function getExtract() {
+      return this.post.content.substr(0, 50) + '..';
+    },
+    getDateFormat: function getDateFormat() {
+      var d = new Date();
+      var day = d.getDate();
+      var month = d.getMonth() + 1;
+      var year = d.getFullYear();
+      return "".concat(year, " - ").concat(month, " - ").concat(day);
+    }
   }
 });
 
@@ -3481,9 +3493,9 @@ var render = function () {
   return _c("div", { staticClass: "item" }, [
     _c("h4", [_vm._v(_vm._s(_vm.post.title))]),
     _vm._v(" "),
-    _c("small", [_vm._v(_vm._s(_vm.post.created_at))]),
+    _c("small", [_vm._v(_vm._s(_vm.getDateFormat()))]),
     _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.post.content))]),
+    _c("p", [_vm._v(_vm._s(_vm.getExtract()))]),
   ])
 }
 var staticRenderFns = []

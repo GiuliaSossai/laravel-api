@@ -1,8 +1,8 @@
 <template>
     <div class="item">
         <h4>{{ post.title }}</h4>
-        <small>{{ post.created_at }}</small>
-        <p>{{ post.content }}</p>
+        <small>{{ getDateFormat() }}</small>
+        <p>{{ getExtract() }}</p>
     </div>
 </template>
 
@@ -12,6 +12,21 @@ export default {
 
     props: {
         'post': Object
+    },
+
+    methods: {
+        getExtract(){
+            return this.post.content.substr(0,50) + '..';
+        },
+
+        getDateFormat(){
+            const d = new Date;
+            let day = d.getDate();
+            let month = d.getMonth() + 1;
+            let year = d.getFullYear();
+
+            return `${year} - ${month} - ${day}`;
+        }
     }
 }
 </script>
