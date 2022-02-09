@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/admin/style.css) }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -26,6 +26,7 @@
                 <a class="navbar-brand" href="{{ route('home') }}">
                     vai al sito
                 </a>
+                
 
                 <a href="{{ route('admin.posts.index') }}" class="mr-3">I tuoi post</a>
                 <a href="{{ route('admin.posts.create') }}">Nuovo Post</a>
