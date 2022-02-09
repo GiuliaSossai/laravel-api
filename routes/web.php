@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('guest.home');
+// })->name('home');
 
 Auth::routes();
 
@@ -34,3 +34,8 @@ Route::middleware('auth')
 //get('/home', 'HomeController@index')->name('index');
 //ordine delle istruzioni è indifferente
 //namespace è la cartella
+
+//dopo le rotte che verranno lette per prime da laravel, dico di mettere tutte le altre in guest.home che verrà gestita da Vue
+Route::get('{any?}', function(){
+    return view('guest.home');
+})->where('any', '.*')->name('home');

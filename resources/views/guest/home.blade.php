@@ -8,7 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>home guest</h1>
+    <div id="app">
+        <h1>home guest</h1>
+    </div>
+    
 
     <script src="{{ asset('js/guest.js) }}"></script>
 </body>
