@@ -1958,6 +1958,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Posts',
@@ -1966,8 +1983,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      apiUrl: 'http://127.0.0.1:8000/api/posts',
-      posts: null
+      //dopo la paginazione bisogna correggere la url per fare la query
+      apiUrl: 'http://127.0.0.1:8000/api/posts?page=',
+      posts: null,
+      pagination: {}
     };
   },
   mounted: function mounted() {
@@ -1977,10 +1996,17 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       // console.log(axios);
-      axios.get(this.apiUrl).then(function (res) {
-        _this.posts = res.data;
-        console.log(_this.posts);
+      axios.get(this.apiUrl + page).then(function (res) {
+        //dopo aver messo paginate nel controller api, devo mettere res.data.data perché ho bisogno dell'ooggetto data restituito dalla paginazione (quindi di fatto ho due oggetti data, unno per la paginazione e uno per la chiamata axios)
+        _this.posts = res.data.data; //console.log(this.posts);
+
+        _this.pagination = {
+          current: res.data.current_page,
+          last: res.data.last_page
+        };
+        console.log(_this.pagination);
       });
     }
   }
@@ -2087,7 +2113,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "main[data-v-4ac4d2f8] {\n  padding: 30px;\n}\nmain h3[data-v-4ac4d2f8] {\n  margin-bottom: 30px;\n}", ""]);
+exports.push([module.i, "main[data-v-4ac4d2f8] {\n  padding: 30px;\n}\nmain h3[data-v-4ac4d2f8] {\n  margin-bottom: 30px;\n}\nmain button[data-v-4ac4d2f8] {\n  padding: 10px;\n  margin-right: 10px;\n}", ""]);
 
 // exports
 
@@ -3386,6 +3412,57 @@ var render = function () {
       _vm._l(_vm.posts, function (post) {
         return _c("PostItem", { key: post.id, attrs: { post: post } })
       }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "navigation" },
+        [
+          _c(
+            "button",
+            {
+              attrs: { disabled: _vm.pagination.current === 1 },
+              on: {
+                click: function ($event) {
+                  return _vm.getPosts(_vm.pagination.current - 1)
+                },
+              },
+            },
+            [_vm._v("prev")]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.pagination.last, function (iteration) {
+            return _c(
+              "button",
+              {
+                key: iteration,
+                attrs: { disabled: _vm.pagination.current === iteration },
+                on: {
+                  click: function ($event) {
+                    return _vm.getPosts(iteration)
+                  },
+                },
+              },
+              [_vm._v(_vm._s(iteration))]
+            )
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              attrs: {
+                disabled: _vm.pagination.current === _vm.pagination.last,
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.getPosts(_vm.pagination.current + 1)
+                },
+              },
+            },
+            [_vm._v("next")]
+          ),
+        ],
+        2
+      ),
     ],
     2
   )
