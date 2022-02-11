@@ -16206,7 +16206,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Volumes/T7/boolean/44/laravel/laravel-api/resources/js/guest.js */"./resources/js/guest.js");
+module.exports = __webpack_require__(/*! /Volumes/T7/boolean/44/laravel/laravel-boolpress/resources/js/guest.js */"./resources/js/guest.js");
 
 
 /***/ })
